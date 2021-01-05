@@ -1,0 +1,72 @@
+﻿<mah:MetroWindow x:Class="SysSped.Apresentation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ctr="clr-namespace:SysSped.Apresentation.Controls" 
+        
+        xmlns:local="clr-namespace:SysSped.Apresentation"
+        xmlns:mah="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Menu DockPanel.Dock="Top" Grid.ColumnSpan="5">
+            <MenuItem Header="Opções">
+                <MenuItem Header="Importar Panilha" Click="AplicarModoImportarPlanilha"/>
+                <MenuItem Header="Corrigir Sped" Click="AplicarModoCorrigirSped"/>
+                <MenuItem Header="Relatório" />
+                <Separator />
+                <MenuItem Header="Sair" />
+            </MenuItem>
+        </Menu>
+        <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Row="0" Grid.Column="0" FontSize="17" Text="..." Padding="1" Foreground="Gray" IsEnabled="False" VerticalContentAlignment="Center" Name="txtFile"></TextBox>
+                <Button Grid.Row="0" Grid.Column="1" Margin="10 0 00 0" Padding="10" Name="btnEscolherArquivo" Click="btnEscolherArquivo_Click">Selecionar</Button>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="3" Background="LightGray">
+            <TextBlock Name="txtEditor" Padding="5"></TextBlock>
+        </StackPanel>
+        <Button Grid.Row="6" Grid.Column="1" Name="btnAtualizar" Click="btnAtualizar_Click" Visibility="Hidden">
+            Atualizar
+        </Button>
+        <Button Grid.Row="6" Grid.Column="3" Name="btnReImportar" Click="btnReImportar_Click" Visibility="Hidden">Reimportar</Button>
+        <Button Grid.Row="6" Grid.Column="3" Name="btnCorrigirSped" Click="btnCorrigirSped_Click" Visibility="Hidden">Corrigir</Button>
+
+        <Grid Grid.RowSpan="8" Grid.ColumnSpan="5"  x:Name="progressBarBG" Visibility="Hidden"
+                             Background="Gray"
+                             Opacity="0.4"
+                             DockPanel.Dock="Left"
+                             HorizontalAlignment="Center"
+                             VerticalAlignment="Center"
+                             Margin="0,-26,0.4,0" Height="446" Width="794"></Grid>
+
+    </Grid>
+</mah:MetroWindow>

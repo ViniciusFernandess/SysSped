@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "5v2BgUgJvR7aQbzrBo5RjfqLPjqVvw24gDikqIt48L9V+j/JiF5f6g3QX0y1AliZRIv6muMwo2o79HviaeF7bw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Vini-pc\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}
