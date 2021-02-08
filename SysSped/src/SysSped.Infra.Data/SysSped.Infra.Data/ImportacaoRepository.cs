@@ -138,5 +138,10 @@ namespace SysSped.Infra.Data
 
             return retorno;
         }
+
+        public void FinalizaTransacaoAtualizar()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

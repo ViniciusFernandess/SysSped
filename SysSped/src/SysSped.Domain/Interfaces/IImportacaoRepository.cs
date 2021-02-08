@@ -23,5 +23,6 @@ namespace SysSped.Domain.Interfaces
         RowImportacao ObterPorCodItem(string codInternoItem);
         void InativarRow(RowImportacao rowBD);
         void InserirRowAtualizada(RowImportacao rowPlanilha);
+        void FinalizaTransacaoAtualizar();
     }
 }

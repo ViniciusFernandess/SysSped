@@ -9,21 +9,13 @@ namespace SysSped.Infra.Data
         public BaseRepository()
         {
             //_conn = new MySqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["SysSped"].ConnectionString);
-            _conn = new MySqlConnection(@"server=localhost;user id=admin;password=abc123;persistsecurityinfo=True;database=sysspeddb");
+            _conn = new MySqlConnection(@"server=localhost;user id=admin;password=abc123;persistsecurityinfo=True;database=sysspeddb;SslMode=none;");
             _conn.Open();
         }
 
         public BaseRepository(bool coisa)
         {
-            _conn = new MySqlConnection(@"server=localhost;user id=admin;password=abc123;persistsecurityinfo=True;database=sys");
-            _conn.Open();
-        }
-
-        public void VoltaConexaoComBDSelecionado()
-        {
-            _conn.Close();
-            _conn.Dispose();
-            _conn = new MySqlConnection(@"server=localhost;user id=admin;password=abc123;persistsecurityinfo=True;database=sysspeddb");
+            _conn = new MySqlConnection(@"server=localhost;user id=admin;password=abc123;persistsecurityinfo=True;database=sys;SslMode=none;");
             _conn.Open();
         }
     }

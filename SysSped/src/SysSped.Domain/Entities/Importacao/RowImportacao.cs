@@ -1,4 +1,5 @@
 ﻿using Dapper.Contrib.Extensions;
+using System;
 
 namespace SysSped.Domain.Entities.Importacao
 {
@@ -6,7 +7,7 @@ namespace SysSped.Domain.Entities.Importacao
     public class RowImportacao
     {
         [Key]
-        public int id { get; set; }
+        public Guid id { get; set; }
         public string rowAdress { get; set; }
         public string codigointerno { get; set; }
         public string DescricaoCliente { get; set; }

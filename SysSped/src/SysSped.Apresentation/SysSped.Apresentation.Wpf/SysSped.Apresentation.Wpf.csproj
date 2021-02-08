@@ -158,6 +158,10 @@
       <Project>{D41187AE-86FE-46F4-82C8-79432FF54002}</Project>
       <Name>SysSped.Infra.CrossCutting</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\SysSped.Infra.Data\SysSped.Infra.Data.Json\SysSped.Infra.Data.Json.csproj">
+      <Project>{C8590E0E-D7ED-48FF-AD41-99ED0C73E2D8}</Project>
+      <Name>SysSped.Infra.Data.Json</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\SysSped.Infra.Data\SysSped.Infra.Data\SysSped.Infra.Data.csproj">
       <Project>{73D2B2F2-807C-4A61-B014-30C50989D7F0}</Project>
       <Name>SysSped.Infra.Data</Name>

@@ -50,3 +50,7 @@ C:\Users\Vini-pc\Documents\Angular\sysSped\SysSped\src\SysSped.Apresentation\Sys
 C:\Users\Vini-pc\Documents\Angular\sysSped\SysSped\src\SysSped.Apresentation\SysSped.Apresentation.Wpf\obj\Debug\SysSped.Apresentation.Wpf_MarkupCompile.lref
 C:\Users\Vini-pc\Documents\Angular\sysSped\SysSped\src\SysSped.Apresentation\SysSped.Apresentation.Wpf\obj\Debug\Views\RelatorioLogWindow.g.cs
 C:\Users\Vini-pc\Documents\Angular\sysSped\SysSped\src\SysSped.Apresentation\SysSped.Apresentation.Wpf\obj\Debug\Views\RelatorioLogWindow.baml
+C:\Users\Vini-pc\Documents\Angular\sysSped\SysSped\src\SysSped.Apresentation\SysSped.Apresentation.Wpf\bin\Debug\SysSped.Infra.Data.Json.dll
+C:\Users\Vini-pc\Documents\Angular\sysSped\SysSped\src\SysSped.Apresentation\SysSped.Apresentation.Wpf\bin\Debug\SysSped.Infra.Data.Json.pdb
+C:\Users\Vini-pc\Documents\Angular\sysSped\SysSped\src\SysSped.Apresentation\SysSped.Apresentation.Wpf\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Vini-pc\Documents\Angular\sysSped\SysSped\src\SysSped.Apresentation\SysSped.Apresentation.Wpf\bin\Debug\Newtonsoft.Json.xml

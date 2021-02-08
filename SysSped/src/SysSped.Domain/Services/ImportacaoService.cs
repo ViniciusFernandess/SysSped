@@ -70,6 +70,8 @@ namespace SysSped.Domain.Services
 
                 _importacaoRepo.InserirRowAtualizada(rowPlanilha);
             }
+
+            _importacaoRepo.FinalizaTransacaoAtualizar();
         }
     }
 }

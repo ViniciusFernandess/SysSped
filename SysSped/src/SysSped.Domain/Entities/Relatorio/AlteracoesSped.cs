@@ -1,8 +1,11 @@
-﻿namespace SysSped.Domain.Entities.Relatorio
+﻿using SysSped.Domain.Core;
+using System;
+
+namespace SysSped.Domain.Entities.Relatorio
 {
     public class AlteracoesSped
     {
-        public int IdBloco0000 { get; set; }
+        public Guid IdBloco0000 { get; set; }
         public string NroLinha { get; set; }
         public string Bloco { get; set; }
         public string CodigoInterno { get; set; }
@@ -12,5 +15,6 @@
         public string ValorAntigo { get; set; }
         public string ValorAtual { get; set; }
         public string DataCadastro { get; set; }
+        public EnumTipoSped TipoSped { get; set; }
     }
 }

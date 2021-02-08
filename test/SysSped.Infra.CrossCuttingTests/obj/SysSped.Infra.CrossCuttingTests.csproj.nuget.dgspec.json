@@ -1,0 +1,293 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.Infra.CrossCuttingTests\\SysSped.Infra.CrossCuttingTests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
+        "projectName": "SysSped.Domain.Core",
+        "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
+        "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Vini-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\3.1.405\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj",
+        "projectName": "SysSped.Domain",
+        "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj",
+        "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Vini-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Dapper.Contrib": {
+              "target": "Package",
+              "version": "[2.0.78, )"
+            },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.4.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\3.1.405\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
+        "projectName": "SysSped.Infra.CrossCutting",
+        "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
+        "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Vini-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.0": {
+            "projectReferences": {
+              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
+              },
+              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.0": {
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.4.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\3.1.405\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.Infra.CrossCuttingTests\\SysSped.Infra.CrossCuttingTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.Infra.CrossCuttingTests\\SysSped.Infra.CrossCuttingTests.csproj",
+        "projectName": "SysSped.Infra.CrossCuttingTests",
+        "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.Infra.CrossCuttingTests\\SysSped.Infra.CrossCuttingTests.csproj",
+        "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.Infra.CrossCuttingTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Vini-pc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
+              },
+              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.4.0, )"
+            },
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.5.0, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.14.7, )"
+            },
+            "coverlet.collector": {
+              "target": "Package",
+              "version": "[1.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "xunit.runner.visualstudio": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "c:\\program files\\dotnet\\sdk\\3.1.405\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

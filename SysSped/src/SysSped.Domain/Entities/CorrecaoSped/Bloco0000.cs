@@ -7,7 +7,7 @@ namespace SysSped.Domain.Entities.CorrecaoSped
     public class Bloco0000
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string REG { get; set; }
         public string COD_VER { get; set; }
         public string TIPO_ESCRIT { get; set; }

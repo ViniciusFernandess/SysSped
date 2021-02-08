@@ -3,7 +3,7 @@ using SysSped.Apresentation.Wpf.Views;
 using SysSped.Domain.Interfaces;
 using SysSped.Infra.CrossCutting.Excel;
 using SysSped.Infra.CrossCutting.Txt;
-using SysSped.Infra.Data;
+using SysSped.Infra.Data.Json;
 using System.Windows;
 
 namespace SysSped.Apresentation.Wpf
@@ -19,8 +19,8 @@ namespace SysSped.Apresentation.Wpf
         private void ConfigureContainer()
         {
             this.container = new StandardKernel();
-            //container.Bind<IImportacaoRepository>().To<ImportacaoRepository>();
-            //container.Bind<ILogRepository>().To<LogRepository>();
+            container.Bind<IImportacaoRepository>().To<ImportacaoRepository>();
+            container.Bind<ILogRepository>().To<LogRepository>();
             container.Bind<IExcelService>().To<ArquivoImportacaoService>().InTransientScope();
             container.Bind<ITxtService>().To<TxtService>().InTransientScope();
             container.Bind<ILogSpedService>().To<LogSpedService>().InTransientScope();
