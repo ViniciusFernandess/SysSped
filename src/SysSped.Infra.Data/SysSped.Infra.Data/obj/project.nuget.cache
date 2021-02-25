@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9tfHHAXZ1gpSvQeoPAD7SMp9pNWkyXrcInB0c6+6jMwJ1nSfAwym4rLKUK/PUbYFUWfETafIhqgX1y8UdlMyHQ==",
+  "dgSpecHash": "Bj9AjAfWlgx7MJZy4cSHIQMT7EMqUJXfmzFE+k1kJz68rB0S5VMyym8tArWX2eKGGEk6I2POztK81kmFbPBhOQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.Data\\SysSped.Infra.Data\\SysSped.Infra.Data.csproj",
+  "projectFilePath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.Data\\SysSped.Infra.Data\\SysSped.Infra.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vini-pc\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",
     "C:\\Users\\Vini-pc\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",

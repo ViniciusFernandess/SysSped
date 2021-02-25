@@ -5122,11 +5122,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
+      "projectUniqueName": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
       "projectName": "SysSped.Infra.CrossCutting",
-      "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
+      "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
       "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\obj\\",
+      "outputPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5145,11 +5145,11 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
-              "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
+            "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+              "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
             },
-            "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
-              "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
+            "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
+              "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
             }
           }
         }

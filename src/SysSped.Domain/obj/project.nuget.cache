@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "uq5Km+p55RG3wfUqIi7kRJWb+coR3xhHMSq1/8MLF9ebyM0L12VFDWd7P0b/tBUs7eKSq3hUb9OLRRibn3Qocg==",
+  "dgSpecHash": "1INpWdgRhJCV5Sv+blGGD+ArhyOydxaVj7V8xrUH/xIZ5EmLYQ8B+rU+z1QFKnfvaA3Ru0v78a5Sbrai9zP2Ow==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj",
+  "projectFilePath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vini-pc\\.nuget\\packages\\dapper\\2.0.78\\dapper.2.0.78.nupkg.sha512",
     "C:\\Users\\Vini-pc\\.nuget\\packages\\dapper.contrib\\2.0.78\\dapper.contrib.2.0.78.nupkg.sha512",

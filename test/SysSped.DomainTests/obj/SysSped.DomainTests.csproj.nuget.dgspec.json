@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.DomainTests\\SysSped.DomainTests.csproj": {}
+    "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\test\\SysSped.DomainTests\\SysSped.DomainTests.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+    "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
         "projectName": "SysSped.Domain.Core",
-        "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
+        "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
         "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\obj\\",
+        "outputPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -62,14 +62,14 @@
         }
       }
     },
-    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
+    "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj",
         "projectName": "SysSped.Domain",
-        "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj",
+        "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj",
         "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\obj\\",
+        "outputPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -88,8 +88,8 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
-                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
+              "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
               }
             }
           }
@@ -132,14 +132,14 @@
         }
       }
     },
-    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj": {
+    "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
+        "projectUniqueName": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
         "projectName": "SysSped.Infra.CrossCutting",
-        "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
+        "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj",
         "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\obj\\",
+        "outputPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -158,11 +158,11 @@
         "frameworks": {
           "netstandard2.0": {
             "projectReferences": {
-              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
-                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
+              "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
               },
-              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
-                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
+              "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
               }
             }
           }
@@ -201,14 +201,14 @@
         }
       }
     },
-    "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.DomainTests\\SysSped.DomainTests.csproj": {
+    "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\test\\SysSped.DomainTests\\SysSped.DomainTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.DomainTests\\SysSped.DomainTests.csproj",
+        "projectUniqueName": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\test\\SysSped.DomainTests\\SysSped.DomainTests.csproj",
         "projectName": "SysSped.DomainTests",
-        "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.DomainTests\\SysSped.DomainTests.csproj",
+        "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\test\\SysSped.DomainTests\\SysSped.DomainTests.csproj",
         "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.DomainTests\\obj\\",
+        "outputPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\test\\SysSped.DomainTests\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -227,14 +227,14 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
-                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
+              "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj"
               },
-              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
-                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
+              "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
               },
-              "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj": {
-                "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj"
+              "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj": {
+                "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.CrossCutting\\SysSped.Infra.CrossCutting.csproj"
               }
             }
           }

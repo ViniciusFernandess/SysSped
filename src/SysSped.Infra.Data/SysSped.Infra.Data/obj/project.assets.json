@@ -6233,11 +6233,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.Data\\SysSped.Infra.Data\\SysSped.Infra.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.Data\\SysSped.Infra.Data\\SysSped.Infra.Data.csproj",
       "projectName": "SysSped.Infra.Data",
-      "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.Data\\SysSped.Infra.Data\\SysSped.Infra.Data.csproj",
+      "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.Data\\SysSped.Infra.Data\\SysSped.Infra.Data.csproj",
       "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Infra.Data\\SysSped.Infra.Data\\obj\\",
+      "outputPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Infra.Data\\SysSped.Infra.Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -6256,8 +6256,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
-              "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
+            "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj": {
+              "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain\\SysSped.Domain.csproj"
             }
           }
         }

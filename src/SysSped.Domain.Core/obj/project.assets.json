@@ -185,11 +185,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
+      "projectUniqueName": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
       "projectName": "SysSped.Domain.Core",
-      "projectPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
+      "projectPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\SysSped.Domain.Core.csproj",
       "packagesPath": "C:\\Users\\Vini-pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\src\\SysSped.Domain.Core\\obj\\",
+      "outputPath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\src\\SysSped.Domain.Core\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "c:\\program files\\dotnet\\sdk\\NuGetFallbackFolder"

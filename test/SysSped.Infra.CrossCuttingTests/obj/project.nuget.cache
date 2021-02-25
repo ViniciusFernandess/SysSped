@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yLCWKlspcPEal25Nlp9lEexj2iQYaSpPkI77drH6inc5ZO5Ac/hQlq1EP0zUiJcD4Debm4nC/ZbHG/IY/cBPMg==",
+  "dgSpecHash": "cRXOE3FFcQe0FgiUpof8Cg+qCccvgqixaw76+s4+pBXB5EPQCyUgrUF0ObANEY9Y0XPdHnDaZmt/etdijxZMew==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Vini-pc\\Desktop\\SysSped\\test\\SysSped.Infra.CrossCuttingTests\\SysSped.Infra.CrossCuttingTests.csproj",
+  "projectFilePath": "C:\\Users\\Vini-pc\\Documents\\Angular\\sysSped\\test\\SysSped.Infra.CrossCuttingTests\\SysSped.Infra.CrossCuttingTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Vini-pc\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",
     "C:\\Users\\Vini-pc\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
