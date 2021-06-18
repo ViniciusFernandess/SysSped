@@ -317,7 +317,9 @@ namespace SysSped.Apresentation.Wpf.ViewModels
                     var txtArquivo = ObtemTextoLidoArquivo(TxtFile);
 
                     var sped = _servSped.ExecutaLeitura(txtArquivo);
-                    spedteveAlteracao = serv.TratarSped(sped, txtArquivo);
+
+                    var spedTrado = serv.TratarSped(sped, txtArquivo);
+                    spedteveAlteracao = serv.CorrigirArquivoSped(spedTrado, txtArquivo); ;
 
                     var arquivoIrginal = new FileInfo(TxtFile);
 

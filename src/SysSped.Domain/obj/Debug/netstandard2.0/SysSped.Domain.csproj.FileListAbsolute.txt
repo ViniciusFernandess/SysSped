@@ -22,3 +22,15 @@ C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\Sys
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.csproj.CopyComplete
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.dll
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.pdb
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\bin\Debug\netstandard2.0\SysSped.Domain.deps.json
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\bin\Debug\netstandard2.0\SysSped.Domain.dll
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\bin\Debug\netstandard2.0\SysSped.Domain.pdb
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\bin\Debug\netstandard2.0\SysSped.Domain.Core.dll
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\bin\Debug\netstandard2.0\SysSped.Domain.Core.pdb
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.csproj.AssemblyReference.cache
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.AssemblyInfoInputs.cache
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.AssemblyInfo.cs
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.csproj.CopyComplete
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.dll
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Domain\obj\Debug\netstandard2.0\SysSped.Domain.pdb

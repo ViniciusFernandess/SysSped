@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace SysSped.Domain.Services
 {
-    public class CorrecaoSpedService
+    public class CorrecaoSpedService //: ICorrecaoSpedService
     {
         private readonly IImportacaoRepository _importacaoRepo;
         private readonly ILogRepository _logRepository;
@@ -18,10 +18,8 @@ namespace SysSped.Domain.Services
             this._logRepository = logService;
         }
 
-        public bool TratarSped(Sped sped, string[] linhasArquivoOriginal)
+        public Sped TratarSped(Sped sped)
         {
-            bloco0000 = sped.Bloco0000;
-
             var baseImportacao = _importacaoRepo.ObterImportacaoAtiva();
             var lstCodItem = baseImportacao.Select(x => x.codigointerno.Trim()).Distinct();
             var lstEan = baseImportacao.Select(x => x.ean.Trim()).Distinct();
@@ -54,6 +52,7 @@ namespace SysSped.Domain.Services
                         if (!temEan && !temCod_item)
                             continue;
 
+
                         var prodEncontrado = dicEanBase.ContainsKey(bloco170.COD_NAT) || dicCodItemBase.ContainsKey(bloco170.COD_ITEM);
 
                         if (prodEncontrado)
@@ -71,9 +70,7 @@ namespace SysSped.Domain.Services
                 RecalcularBlocoC100(bloco100);
             }
 
-            var foiTratado = CorrigirArquivoSped(sped, linhasArquivoOriginal);
-
-            return foiTratado;
+            return sped;
         }
 
         private void AplicaRegraProdNaoEncontrado(C170 bloco170Arquivo, EnumTipoNota tipoNota)
@@ -198,8 +195,10 @@ namespace SysSped.Domain.Services
             return ehCfopDaRegra;
         }
 
-        private bool CorrigirArquivoSped(Sped sped, string[] linhasArquivoOriginal)
+        public bool CorrigirArquivoSped(Sped sped, string[] linhasArquivoOriginal)
         {
+            bloco0000 = sped.Bloco0000;
+
             var c100Tratados = sped.BlocosC100.Where(C100 => C100.BlocosC170.Any(c170 => c170.Tratado));
             var teveAlteracao = c100Tratados.Any();
 
@@ -557,5 +556,6 @@ namespace SysSped.Domain.Services
 
             return (QTD * VL_ITEM).ToString().ToAliquotaDecimalDomain();
         }
+
     }
 }

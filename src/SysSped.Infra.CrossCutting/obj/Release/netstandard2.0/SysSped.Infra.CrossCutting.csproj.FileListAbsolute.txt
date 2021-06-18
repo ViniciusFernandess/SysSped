@@ -26,3 +26,17 @@ C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\nets
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.csproj.CopyComplete
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.dll
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.pdb
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\bin\Release\netstandard2.0\SysSped.Infra.CrossCutting.deps.json
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\bin\Release\netstandard2.0\SysSped.Infra.CrossCutting.dll
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\bin\Release\netstandard2.0\SysSped.Infra.CrossCutting.pdb
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\bin\Release\netstandard2.0\SysSped.Domain.Core.dll
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\bin\Release\netstandard2.0\SysSped.Domain.dll
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\bin\Release\netstandard2.0\SysSped.Domain.Core.pdb
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\bin\Release\netstandard2.0\SysSped.Domain.pdb
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.csproj.AssemblyReference.cache
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.AssemblyInfoInputs.cache
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.AssemblyInfo.cs
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.csproj.CoreCompileInputs.cache
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.csproj.CopyComplete
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.dll
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Infra.CrossCutting\obj\Release\netstandard2.0\SysSped.Infra.CrossCutting.pdb

@@ -2,9 +2,11 @@
 using Moq;
 using SysSped.Domain.Core;
 using SysSped.Domain.Entities.CorrecaoSped;
+using SysSped.Domain.Entities.Importacao;
 using SysSped.Domain.Interfaces;
 using SysSped.Domain.Services;
 using SysSped.Infra.CrossCutting.Txt;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -14,6 +16,7 @@ namespace SysSped.DomainTests.Services
     {
         private readonly Mock<IImportacaoRepository> _mockRepoImportacao;
         private readonly Mock<ILogRepository> _mockLogRepository;
+        private readonly Mock<ICorrecaoSpedService> _correcaoSpedService;
         private readonly ITxtService _txtService;
 
         public CorrecaoSpedServiceTests()
@@ -34,23 +37,28 @@ namespace SysSped.DomainTests.Services
         public void DeveInserirCST_PIS_TratadoConformeOriginal(string cstPisOriginal, string cstPisEsperado)
         {
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstPisEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "18045", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
             var c170_ = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
             c170.CST_PIS = cstPisOriginal;
             c170_.CST_PIS = cstPisOriginal;
             c170.COD_ITEM = "18045";
+            c170.COD_NAT = "";
             c170_.COD_ITEM = "18045";
+            c170_.COD_NAT = "";
 
             sped.BlocosC100.Add(c100);
             c100.BlocosC170.Add(c170);
             c100.BlocosC170.Add(c170_);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var blocos170ComCST_PIS_Original = sped.BlocosC100.First().BlocosC170.Where(bloco => bloco.CST_PIS == cstPisOriginal);
             var trocouTodosPisParaEsperado = blocos170ComCST_PIS_Original.All(bloco => bloco.CST_PIS_TRATADO == cstPisEsperado);
@@ -71,23 +79,28 @@ namespace SysSped.DomainTests.Services
         public void DeveInserirCST_Cofins_TratadoConformeOriginal(string cstCofinsOriginal, string cstCofinsEsperado)
         {
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstCofinsEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "18045", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
             var c170_ = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
             c170.COD_ITEM = "18045";
             c170.CST_COFINS = cstCofinsOriginal;
+            c170.COD_NAT = "";
             c170_.COD_ITEM = "18045";
             c170_.CST_COFINS = cstCofinsOriginal;
+            c170_.COD_NAT = "";
 
             sped.BlocosC100.Add(c100);
             c100.BlocosC170.Add(c170);
             c100.BlocosC170.Add(c170_);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var blocos170ComCST_Original = sped.BlocosC100.First().BlocosC170.Where(bloco => bloco.CST_COFINS == cstCofinsOriginal);
             var trocouTodosCofnsParaEsperado = blocos170ComCST_Original.All(bloco => bloco.CST_COFINS_TRATADO == cstCofinsEsperado);
@@ -113,13 +126,21 @@ namespace SysSped.DomainTests.Services
                 $@"|C170|2|90571|CONSERTO|11|UND|945,6|0|1|540|1403||945,6|0|0|0|0|0|0|52|||||{cstOriginal}|945,6|0|||0|{cstOriginal}|945,6|0|||0|3.02.1.1.00002|",
             };
 
-            _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
-            _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockLogRepository.Setup(mock => mock.RegistrarLogBloco0000(It.IsAny<Bloco0000>())).Returns(1);
 
             var sped = _txtService.ExecutaLeitura(arquivoSpedOriginal);
+            sped.Bloco0000 = new Bloco0000();
+            sped.Blocos0200 = new List<Bloco0200>();
+            sped.BlocosC100.First().BlocosC170[0].Tratado = true;
+            sped.BlocosC100.First().BlocosC170[0].CST_PIS_TRATADO = cstEsperado;
+            sped.BlocosC100.First().BlocosC170[0].CST_COFINS_TRATADO = cstEsperado;
+            sped.BlocosC100.First().BlocosC170[1].Tratado = true;
+            sped.BlocosC100.First().BlocosC170[1].CST_PIS_TRATADO = cstEsperado;
+            sped.BlocosC100.First().BlocosC170[1].CST_COFINS_TRATADO = cstEsperado;
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, arquivoSpedOriginal);
+            serv.CorrigirArquivoSped(sped, arquivoSpedOriginal);
+
 
             var primeiroC170 = sped.BlocosC100[0].BlocosC170[0];
             var segundoC170 = sped.BlocosC100[0].BlocosC170[1];
@@ -154,11 +175,16 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockLogRepository.Setup(mock => mock.RegistrarLogBloco0000(It.IsAny<Bloco0000>())).Returns(1);
 
             var sped = _txtService.ExecutaLeitura(arquivoSpedOriginal);
+            sped.BlocosC100.First().BlocosC170[0].Tratado = true;
+            sped.BlocosC100.First().BlocosC170[0].CST_PIS_TRATADO = cstEsperado;
+            sped.BlocosC100.First().BlocosC170[1].Tratado = true;
+            sped.BlocosC100.First().BlocosC170[1].CST_COFINS_TRATADO = cstEsperado;
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, arquivoSpedOriginal);
+            serv.CorrigirArquivoSped(sped, arquivoSpedOriginal);
 
             var primeiroC170 = sped.BlocosC100[0].BlocosC170[0];
             var segundoC170 = sped.BlocosC100[0].BlocosC170[1];
@@ -184,11 +210,13 @@ namespace SysSped.DomainTests.Services
                 $@"|C170|2|90571|CONSERTO|5|UND|283,88|0|1||1102||283,88|0|0|0|0|0|0|52|||||73|283,88|0|||0|73|283,88|0|||0|3.02.1.1.00002|"
             };
 
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao>());
+
             var spedOriginal = _txtService.ExecutaLeitura(arquivoSpedOriginal);
             var spedTratado = _txtService.ExecutaLeitura(arquivoSpedTratado);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(spedTratado, arquivoSpedTratado);
+            serv.TratarSped(spedTratado);
 
             var tratouSped = spedOriginal.BlocosC100.First().BlocosC170.FirstOrDefault().VL_PIS != spedTratado.BlocosC100.First().BlocosC170.FirstOrDefault().VL_PIS;
 
@@ -226,10 +254,12 @@ namespace SysSped.DomainTests.Services
                 $@"|C170|2|90571|CONSERTO|5|UND|283,88|0|1||1102||283,88|0|0|0|0|0|0|52|||||73|283,88|0|||0|73|283,88|0|||0|3.02.1.1.00002|",
             };
 
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao>());
+
             var spedTratado = _txtService.ExecutaLeitura(arquivoSpedTratado);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(spedTratado, arquivoSpedTratado);
+            serv.TratarSped(spedTratado);
 
             var temC100Tratado = spedTratado.BlocosC100.First().BlocosC170.Any(c170 => c170.Tratado);
 
@@ -240,24 +270,26 @@ namespace SysSped.DomainTests.Services
         [Fact]
         public void DeveCorrigirC100NaLinhaNoArquivoSped()
         {
-            var arquivoSpedTratado = new string[] {
-                $@"|C100|0|1|36968395000168|55|00|1|119|33200736968395000168550010000001191176609464|11072020|11072020|514,62|0|0|0|514,62|9|0|0|0|283,88|0|0|0|0|12|13|0|0|",
-                $@"|C170|1|95183|CONSERTO|1|UND|230,74|0|1|540|1556||0|0|0|0|0|0|0|52|||||73|230,74|0|||5|73|230,74|0|||0|3.02.1.1.00002|",
-                $@"|C170|2|90571|CONSERTO|5|UND|283,88|0|1||1102||283,88|0|0|0|0|0|0|52|||||73|283,88|0|||0|73|283,88|0|||0|3.02.1.1.00002|"
-            };
-
-            var spedTratado = _txtService.ExecutaLeitura(arquivoSpedTratado);
-
-            var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(spedTratado, arquivoSpedTratado);
-
             var arquivoSpedOriginal = new string[] {
                 $@"|C100|0|1|36968395000168|55|00|1|119|33200736968395000168550010000001191176609464|11072020|11072020|514,62|0|0|0|514,62|9|0|0|0|283,88|0|0|0|0|0|0|0|0|",
                 $@"|C170|1|95183|CONSERTO|1|UND|230,74|0|1|540|1556||0|0|0|0|0|0|0|52|||||73|230,74|0|||5|73|230,74|0|||0|3.02.1.1.00002|",
                 $@"|C170|2|90571|CONSERTO|5|UND|283,88|0|1||1102||283,88|0|0|0|0|0|0|52|||||73|283,88|0|||0|73|283,88|0|||0|3.02.1.1.00002|"
             };
 
+            var arquivoSpedTratado = new string[] {
+                $@"|C100|0|1|36968395000168|55|00|1|119|33200736968395000168550010000001191176609464|11072020|11072020|514,62|0|0|0|514,62|9|0|0|0|283,88|0|0|0|0|12|13|0|0|",
+                $@"|C170|1|95183|CONSERTO|1|UND|230,74|0|1|540|1556||0|0|0|0|0|0|0|52|||||73|230,74|0|||5|73|230,74|0|||0|3.02.1.1.00002|",
+                $@"|C170|2|90571|CONSERTO|5|UND|283,88|0|1||1102||283,88|0|0|0|0|0|0|52|||||73|283,88|0|||0|73|283,88|0|||0|3.02.1.1.00002|"
+            };
+
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
+
             var spedOriginal = _txtService.ExecutaLeitura(arquivoSpedOriginal);
+            var spedTratado = _txtService.ExecutaLeitura(arquivoSpedTratado);
+
+            var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
+            serv.TratarSped(spedTratado);
+            serv.CorrigirArquivoSped(spedTratado, arquivoSpedTratado);
 
             var tratouSped = spedOriginal.BlocosC100.First().BlocosC170.FirstOrDefault().VL_PIS != spedTratado.BlocosC100.First().BlocosC170.FirstOrDefault().VL_PIS;
 
@@ -275,11 +307,16 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_BC_PIS = bcPisOriginal;
@@ -289,7 +326,7 @@ namespace SysSped.DomainTests.Services
             c100.BlocosC170.Add(c170);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var mateveBC_Original = sped.BlocosC100.First().BlocosC170.All(bloco =>
                 bloco.VL_BC_PIS == bcPisOriginal
@@ -307,11 +344,16 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_PIS = "110";
@@ -324,7 +366,7 @@ namespace SysSped.DomainTests.Services
             c100.BlocosC170.Add(c170);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var zerouAliquotaPercent = sped.BlocosC100.First().BlocosC170.All(bloco =>
                 bloco.ALIQ_PIS == "0"
@@ -350,11 +392,16 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_BC_PIS = bcPisOriginal;
@@ -365,7 +412,7 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var zerouBC = sped.BlocosC100.First().BlocosC170.All(bloco =>
                 bloco.VL_BC_PIS == "0"
@@ -383,11 +430,16 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_PIS = "110";
@@ -400,7 +452,7 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var zerouAliquotaPercent = sped.BlocosC100.First().BlocosC170.All(bloco =>
                 bloco.ALIQ_PIS == "0"
@@ -426,11 +478,16 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_BC_PIS = bcPisOriginal;
@@ -441,7 +498,7 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var zerouBC = sped.BlocosC100.First().BlocosC170.All(bloco =>
                 bloco.VL_BC_PIS == "0"
@@ -459,11 +516,16 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_PIS = "110";
@@ -476,7 +538,7 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var zerouAliquotaPercent = sped.BlocosC100.First().BlocosC170.All(bloco =>
                 bloco.ALIQ_PIS == "0"
@@ -504,11 +566,16 @@ namespace SysSped.DomainTests.Services
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaPisProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqPisEsperado.ToString());
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaCofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqCofinsEsperado.ToString());
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.ALIQ_PIS = "3";
@@ -519,7 +586,7 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var aliqPisTratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().ALIQ_PIS;
             var aliqCofinsTratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().ALIQ_COFINS;
@@ -540,11 +607,16 @@ namespace SysSped.DomainTests.Services
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaPisProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqPisEsperado.ToString());
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaCofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqCofinsEsperado.ToString());
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.ALIQ_PIS = "3";
@@ -555,7 +627,7 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var aliqPisTratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().ALIQ_PIS;
             var aliqCofinsTratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().ALIQ_COFINS;
@@ -576,11 +648,16 @@ namespace SysSped.DomainTests.Services
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaPisProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqPisEsperado.ToString());
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaCofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqCofinsEsperado.ToString());
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.ALIQ_PIS = "3";
@@ -591,7 +668,7 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var aliqPisTratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().ALIQ_PIS;
             var aliqCofinsTratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().ALIQ_COFINS;
@@ -611,27 +688,33 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterAliquotaPisProdutoPorCod_Item(It.IsAny<string>())).Returns("3");
+            _mockRepoImportacao.Setup(mock => mock.ObterAliquotaCofinsProdutoPorCod_Item(It.IsAny<string>())).Returns("4");
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.ALIQ_PIS = "3";
             c170.ALIQ_COFINS = "4";
             c170.VL_ITEM = vl_item.ToString();
             c170.QTD = qtd.ToString();
-            c170.COD_ITEM = "18045";
 
             c100.BlocosC170.Add(c170);
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
-            var VL_BC_PIS_Esperado = qtd * vl_item;
-            var VL_BC_COFINS_Esperado = qtd * vl_item;
+            var VL_BC_PIS_Esperado = vl_item;
+            var VL_BC_COFINS_Esperado = vl_item;
 
             var VL_BC_PIS_Tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_PIS;
             var VL_BC_COFINS_Tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_COFINS;
@@ -650,27 +733,33 @@ namespace SysSped.DomainTests.Services
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterAliquotaPisProdutoPorCod_Item(It.IsAny<string>())).Returns("3");
+            _mockRepoImportacao.Setup(mock => mock.ObterAliquotaCofinsProdutoPorCod_Item(It.IsAny<string>())).Returns("4");
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.ALIQ_PIS = "3";
             c170.ALIQ_COFINS = "4";
             c170.VL_ITEM = vl_item.ToString();
             c170.QTD = qtd.ToString();
-            c170.COD_ITEM = "18045";
 
             c100.BlocosC170.Add(c170);
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
-            var VL_BC_PIS_Esperado = qtd * vl_item;
-            var VL_BC_COFINS_Esperado = qtd * vl_item;
+            var VL_BC_PIS_Esperado = vl_item;
+            var VL_BC_COFINS_Esperado = vl_item;
 
             var VL_BC_PIS_Tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_PIS;
             var VL_BC_COFINS_Tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_COFINS;
@@ -693,28 +782,32 @@ namespace SysSped.DomainTests.Services
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaPisProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqPisPlanilha.ToString());
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaCofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqCofinsPlanilha.ToString());
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_ITEM = vl_item.ToString();
             c170.QTD = qtd.ToString();
-            c170.COD_ITEM = "18045";
 
             c100.BlocosC170.Add(c170);
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var vl_bc_pis = double.Parse(sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_PIS);
             var vl_bc_cofins = double.Parse(sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_COFINS);
 
-            var vl_pis_esperado = vl_bc_pis * aliqPisPlanilha.ToAliquotaDoubleDomain();
-            var vl_cofins_esperado = vl_bc_cofins * aliqCofinsPlanilha.ToAliquotaDoubleDomain();
+            var vl_pis_esperado = (vl_bc_pis * (aliqPisPlanilha / 100)).ToString().ToAliquotaDecimalDomain();
+            var vl_cofins_esperado = (vl_bc_cofins * (aliqCofinsPlanilha / 100)).ToString().ToAliquotaDecimalDomain(); 
 
             var vl_pis_tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_PIS;
             var vl_cofins_tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_COFINS;
@@ -728,8 +821,8 @@ namespace SysSped.DomainTests.Services
         {
             var cstOriginal = "73";
             var cstEsperado = "50";
-            var aliqPisPlanilha = new Faker().Random.Double(1, 25);
-            var aliqCofinsPlanilha = new Faker().Random.Double(1, 25);
+            var aliqPisPlanilha = new Faker().Random.Double(1, 25).ToString("F");
+            var aliqCofinsPlanilha = new Faker().Random.Double(1, 25).ToString("F");
             var qtd = new Faker().Random.Double(1, 100);
             var vl_item = new Faker().Random.Double(1, 100);
 
@@ -737,28 +830,32 @@ namespace SysSped.DomainTests.Services
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaPisProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqPisPlanilha.ToString());
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaCofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqCofinsPlanilha.ToString());
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_ITEM = vl_item.ToString();
             c170.QTD = qtd.ToString();
-            c170.COD_ITEM = "18045";
 
             c100.BlocosC170.Add(c170);
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var vl_bc_pis = double.Parse(sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_PIS);
             var vl_bc_cofins = double.Parse(sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_COFINS);
 
-            var vl_pis_esperado = vl_bc_pis * aliqPisPlanilha.ToAliquotaDoubleDomain();
-            var vl_cofins_esperado = vl_bc_cofins * aliqCofinsPlanilha.ToAliquotaDoubleDomain();
+            var vl_pis_esperado = (vl_bc_pis * (double.Parse(aliqPisPlanilha) / 100)).ToString().ToAliquotaDecimalDomain();
+            var vl_cofins_esperado = (vl_bc_cofins * (double.Parse(aliqCofinsPlanilha) / 100)).ToString().ToAliquotaDecimalDomain();
 
             var vl_pis_tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_PIS;
             var vl_cofins_tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_COFINS;
@@ -773,31 +870,35 @@ namespace SysSped.DomainTests.Services
             var cstOriginal = "70";
             var cstEsperado = "73";
             var qtd = new Faker().Random.Number(1, 100);
-            var vl_item = new Faker().Random.Double(1, 100); ;
+            var vl_item = new Faker().Random.Double(1, 100); 
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.ALIQ_PIS = "3";
             c170.ALIQ_COFINS = "4";
             c170.VL_ITEM = vl_item.ToString();
             c170.QTD = qtd.ToString();
-            c170.COD_ITEM = "18045";
 
             c100.BlocosC170.Add(c170);
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
-            var VL_BC_PIS_Esperado = qtd * vl_item;
-            var VL_BC_COFINS_Esperado = qtd * vl_item;
+            var VL_BC_PIS_Esperado = vl_item;
+            var VL_BC_COFINS_Esperado = vl_item;
 
             var VL_BC_PIS_Tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_PIS;
             var VL_BC_COFINS_Tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_COFINS;
@@ -811,8 +912,8 @@ namespace SysSped.DomainTests.Services
         {
             var cstOriginal = "70";
             var cstEsperado = "73";
-            var aliqPisPlanilha = new Faker().Random.Double(1, 25);
-            var aliqCofinsPlanilha = new Faker().Random.Double(1, 25);
+            var aliqPisPlanilha = new Faker().Random.Double(1, 25).ToString("F");
+            var aliqCofinsPlanilha = new Faker().Random.Double(1, 25).ToString("F");
             var qtd = new Faker().Random.Double(1, 100);
             var vl_item = new Faker().Random.Double(1, 100);
 
@@ -820,28 +921,32 @@ namespace SysSped.DomainTests.Services
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaPisProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqPisPlanilha.ToString());
             _mockRepoImportacao.Setup(mock => mock.ObterAliquotaCofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(aliqCofinsPlanilha.ToString());
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "95183", ean = "" } });
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
+            c170.COD_ITEM = "95183";
+            c170.COD_NAT = "";
             c170.CST_PIS = cstOriginal;
             c170.CST_COFINS = cstOriginal;
             c170.VL_ITEM = vl_item.ToString();
             c170.QTD = qtd.ToString();
-            c170.COD_ITEM = "18045";
 
             c100.BlocosC170.Add(c170);
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var vl_bc_pis = double.Parse(sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_PIS);
             var vl_bc_cofins = double.Parse(sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_BC_COFINS);
 
-            var vl_pis_esperado = vl_bc_pis * aliqPisPlanilha.ToAliquotaDoubleDomain();
-            var vl_cofins_esperado = vl_bc_cofins * aliqCofinsPlanilha.ToAliquotaDoubleDomain();
+            var vl_pis_esperado = (vl_bc_pis * (double.Parse(aliqPisPlanilha) / 100)).ToString().ToAliquotaDecimalDomain();
+            var vl_cofins_esperado = (vl_bc_cofins * (double.Parse(aliqCofinsPlanilha) / 100)).ToString().ToAliquotaDecimalDomain();
 
             var vl_pis_tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_PIS;
             var vl_cofins_tratado = sped.BlocosC100.First().BlocosC170.FirstOrDefault().VL_COFINS;
@@ -861,6 +966,7 @@ namespace SysSped.DomainTests.Services
         {
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao> { new RowImportacao { codigointerno = "90118", ean = "" }, new RowImportacao { codigointerno = "98571", ean = "" } });
 
             var arquivoSpedOriginal = new string[] {
                 $@"|C100|0|1|36968395000168|55|00|1|119|33200736968395000168550010000001191176609464|11072020|11072020|514,65|0|0|0|514,65|9|0|0|0|283,88|0|0|0|0|0|0|0|0|",
@@ -877,7 +983,8 @@ namespace SysSped.DomainTests.Services
             var sped = _txtService.ExecutaLeitura(arquivoSpedOriginal);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, arquivoSpedOriginal);
+            var spedTratado = serv.TratarSped(sped);
+            serv.CorrigirArquivoSped(spedTratado, arquivoSpedOriginal);
 
             var cstsPis = arquivoSpedOriginal.Skip(1).Select(row => row.Split('|')[25]);
             var cstsCofins = arquivoSpedOriginal.Skip(1).Select(row => row.Split('|')[31]);
@@ -897,6 +1004,7 @@ namespace SysSped.DomainTests.Services
         {
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao>());
 
             var arquivoSpedOriginal = new string[] {
                 $@"|C100|0|1|36968395000168|55|00|1|119|33200736968395000168550010000001191176609464|11072020|11072020|514,65|0|0|0|514,65|9|0|0|0|283,88|0|0|0|0|0|0|0|0|",
@@ -913,7 +1021,7 @@ namespace SysSped.DomainTests.Services
             var sped = _txtService.ExecutaLeitura(arquivoSpedOriginal);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, arquivoSpedOriginal);
+            serv.TratarSped(sped);
 
             var cstsPis = arquivoSpedOriginal.Skip(1).Select(row => row.Split('|')[25]);
             var cstsCofins = arquivoSpedOriginal.Skip(1).Select(row => row.Split('|')[31]);
@@ -940,12 +1048,15 @@ namespace SysSped.DomainTests.Services
             string cstPisEsperado = "98";
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_PisProdutoPorCod_Item(It.IsAny<string>())).Returns(cstPisEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao>());
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
             var c170_ = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
             c170.CST_PIS = cstPisOriginal;
             c170_.CST_PIS = cstPisOriginal;
             c170.CFOP = cfop;
@@ -956,7 +1067,8 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+
+            serv.TratarSped(sped);
 
             var blocos170ComCST_PIS_Original = sped.BlocosC100.First().BlocosC170.Where(bloco => bloco.CST_PIS == cstPisOriginal);
             var trocouTodosPisParaEsperado = blocos170ComCST_PIS_Original.All(bloco => bloco.CST_PIS_TRATADO == cstPisEsperado);
@@ -982,12 +1094,15 @@ namespace SysSped.DomainTests.Services
             string cstCofinsEsperado = "98";
 
             _mockRepoImportacao.Setup(mock => mock.ObterCST_CofinsProdutoPorCod_Item(It.IsAny<string>())).Returns(cstCofinsEsperado);
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao>());
 
             var sped = new Sped();
             var c100 = new C100();
             var c170 = new C170();
             var c170_ = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
             c170.CST_COFINS = cstCofinsOriginal;
             c170_.CST_COFINS = cstCofinsOriginal;
             c170.CFOP = cfop;
@@ -998,7 +1113,7 @@ namespace SysSped.DomainTests.Services
             sped.BlocosC100.Add(c100);
 
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var blocos170ComCST_Cofins_Original = sped.BlocosC100.First().BlocosC170.Where(bloco => bloco.CST_COFINS == cstCofinsOriginal);
             var trocouTodosCofinsParaEsperado = blocos170ComCST_Cofins_Original.All(bloco => bloco.CST_COFINS_TRATADO == cstCofinsEsperado);
@@ -1026,6 +1141,8 @@ namespace SysSped.DomainTests.Services
             var c100 = new C100();
             var c170 = new C170();
 
+            c100.COD_MOD = "55";
+            c100.IND_OPER = "0";
             c170.CFOP = cfop;
             c170.VL_BC_PIS = new Faker().Random.Double(1, 100).ToString();
             c170.VL_BC_COFINS = new Faker().Random.Double(1, 100).ToString();
@@ -1037,8 +1154,10 @@ namespace SysSped.DomainTests.Services
             c100.BlocosC170.Add(c170);
             sped.BlocosC100.Add(c100);
 
+            _mockRepoImportacao.Setup(mock => mock.ObterImportacaoAtiva()).Returns(new List<RowImportacao>());
+
             var serv = new CorrecaoSpedService(_mockRepoImportacao.Object, _mockLogRepository.Object);
-            serv.TratarSped(sped, new string[] { });
+            serv.TratarSped(sped);
 
             var zerouAliquotaPercent = sped.BlocosC100.First().BlocosC170.All(bloco =>
                 bloco.ALIQ_PIS == "0"
@@ -1061,7 +1180,7 @@ namespace SysSped.DomainTests.Services
         }
 
         [Theory]
-        [InlineData("0", "0,00")]
+        [InlineData("0", "0")]
         [InlineData("1.7", "1,70")]
         [InlineData("1.7666", "1,76")]
         [InlineData("1.555,7666", "1555,76")]

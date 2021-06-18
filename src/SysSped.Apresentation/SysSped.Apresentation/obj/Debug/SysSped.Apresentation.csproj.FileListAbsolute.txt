@@ -106,3 +106,13 @@ C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Apresentation\SysSped.Apresentation
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation.csproj.CopyComplete
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation.exe
 C:\Users\Vini-pc\Desktop\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation.pdb
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation.csproj.AssemblyReference.cache
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation.exe.config
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\Controls\CircularProgressBar.baml
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\Controls\CircularProgressBar.g.cs
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\MainWindow.g.cs
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\App.g.cs
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation_MarkupCompile.cache
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation_MarkupCompile.lref
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation.exe
+C:\Users\Vini\Documents\Github\SysSpedSteel\SysSped\src\SysSped.Apresentation\SysSped.Apresentation\obj\Debug\SysSped.Apresentation.pdb

@@ -286,7 +286,7 @@ namespace SysSped.Infra.CrossCutting.Excel
 
         private bool VerificaSeEhCampoPadrao(string nomeCampo)
         {
-            var ehCampoValido = CamposPadroes.Any(regex => Regex.IsMatch(nomeCampo.ToLower().Replace(" ", ""), regex.ToLower().Replace(" ", "")));
+            var ehCampoValido = CamposPadroes.Any(regex => Regex.IsMatch(regex.ToLower().Replace(" ", ""), nomeCampo.ToLower().Replace(" ", "")));
 
             if (!ehCampoValido)
                 Erros.Add(new RequestResult(Resource.CAMPO_INVALIDO_NO_ARQUIVO + ": " + nomeCampo));

@@ -1,6 +1,8 @@
-﻿using OfficeOpenXml;
+﻿using Bogus;
+using OfficeOpenXml;
 using SysSped.Domain.Core;
 using SysSped.Infra.CrossCuttingTests.Builders;
+using System.Collections.Generic;
 using System.Linq;
 using Xunit;
 
@@ -129,10 +131,10 @@ namespace SysSped.Infra.CrossCuttingTests.Excel
             var serv = ExcelServiceBuilder.Create().Build();
             var package = ArquivoExcelBuilder.Create().ComCabecalho(serv.CamposPadroes).Build();
 
-            package.Workbook.Worksheets[0].Cells["A1"].Value = nomeCampo;
+            package.Workbook.Worksheets[0].Cells[1, serv.CamposPadroes.Count + 1].Value = nomeCampo;
 
             serv.ExecutaLeitura(package);
-            var ehCampoInValido = serv.Erros.Any(x => x.Mensagem == Resource.CAMPO_INVALIDO_NO_ARQUIVO);
+            var ehCampoInValido = serv.Erros.Any(x => x.Mensagem.StartsWith(Resource.CAMPO_INVALIDO_NO_ARQUIVO));
 
             Assert.True(ehCampoInValido);
         }
@@ -197,29 +199,20 @@ namespace SysSped.Infra.CrossCuttingTests.Excel
         public void DeveTerErroSeNaoTemTodosOsCamposPadroes()
         {
             var serv = ExcelServiceBuilder.Create().Build();
-            var package = ArquivoExcelBuilder.Create().ComCabecalho(serv.CamposPadroes).Build();
+            var camposPadroesErro = new List<string>(serv.CamposPadroes);
+
+            var indice = new Faker().Random.Number(0, serv.CamposPadroes.Count - 1);
+            camposPadroesErro.RemoveAt(indice);
+
+            var package = ArquivoExcelBuilder.Create().ComCabecalho(camposPadroesErro).Build();
             var sheet = package.Workbook.Worksheets[0];
 
             package.Workbook.Worksheets[0].Cells["A1"].Value = sheet.Cells["A2"].Value;
 
             serv.ExecutaLeitura(package);
-            bool naotemTodosCamposPadroes = serv.Erros.Any(x => x.Mensagem == Resource.ARQUIVO_ESTA_FALTANDO_CAMPO_PADRAO);
+            bool naotemTodosCamposPadroes = serv.Erros.Any(x => x.Mensagem.StartsWith(Resource.ARQUIVO_ESTA_FALTANDO_CAMPO_PADRAO));
 
             Assert.True(naotemTodosCamposPadroes);
-        }
-
-        [Fact]
-        public void DeveTerErroSerSeNaoTemTodosOsCamposPadroes()
-        {
-            var serv = ExcelServiceBuilder.Create().Build();
-            var package = ArquivoExcelBuilder.Create().ComCabecalho(serv.CamposPadroes).Build();
-
-            package.Workbook.Worksheets[0].Cells["A1"].Value = "";
-
-            serv.ExecutaLeitura(package);
-            bool naoTemTodosCamposPadroes = serv.Erros.Any(x => x.Mensagem == Resource.ARQUIVO_ESTA_FALTANDO_CAMPO_PADRAO);
-
-            Assert.True(naoTemTodosCamposPadroes);
         }
     }
 }
